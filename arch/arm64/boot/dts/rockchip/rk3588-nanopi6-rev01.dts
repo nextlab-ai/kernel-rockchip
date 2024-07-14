@@ -93,34 +93,34 @@
 		>;
 	};
 
-	// adc_keys: adc-keys {
-	// 	compatible = "adc-keys";
-	// 	io-channels = <&saradc 1>;
-	// 	io-channel-names = "buttons";
-	// 	keyup-threshold-microvolt = <1800000>;
-	// 	poll-interval = <100>;
+	adc_keys: adc-keys {
+		compatible = "adc-keys";
+		io-channels = <&saradc 1>;
+		io-channel-names = "buttons";
+		keyup-threshold-microvolt = <1800000>;
+		poll-interval = <100>;
 
-	// 	vol-up-key {
-	// 		label = "volume up";
-	// 		linux,code = <KEY_VOLUMEUP>;
-	// 		press-threshold-microvolt = <17000>;
-	// 	};
-	// };
+		vol-up-key {
+			label = "volume up";
+			linux,code = <KEY_VOLUMEUP>;
+			press-threshold-microvolt = <17000>;
+		};
+	};
 
 
-	// gpio_keys: gpio-keys {
-	// 	compatible = "gpio-keys";
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&key1_pin>;
+	gpio_keys: gpio-keys {
+		compatible = "gpio-keys";
+		pinctrl-names = "default";
+		pinctrl-0 = <&key1_pin>;
 
-	// 	button@1 {
-	// 		debounce-interval = <50>;
-	// 		gpios = <&gpio0 RK_PD5 GPIO_ACTIVE_LOW>;
-	// 		label = "K1";
-	// 		linux,code = <BTN_1>;
-	// 		wakeup-source;
-	// 	};
-	// };
+		button@1 {
+			debounce-interval = <50>;
+			gpios = <&gpio0 RK_PD5 GPIO_ACTIVE_LOW>;
+			label = "K1";
+			linux,code = <BTN_1>;
+			wakeup-source;
+		};
+	};
 
 
 	gpio_leds: gpio-leds {
@@ -639,11 +639,11 @@
 
 
 &pinctrl {
-	// gpio-key {
-	// 	key1_pin: key1-pin {
-	// 		rockchip,pins = <0 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
-	// 	};
-	// };
+	gpio-key {
+		key1_pin: key1-pin {
+			rockchip,pins = <0 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
+		};
+	};
 
 	gpio-leds {
 		sys_led_pin: sys-led-pin {
