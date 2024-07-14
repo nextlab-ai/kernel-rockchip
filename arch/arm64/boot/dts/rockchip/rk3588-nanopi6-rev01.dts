@@ -17,7 +17,7 @@
 		ethernet0 = &r8125_u10;
 		ethernet1 = &r8125_u12;
 		nvme0 = &nvme0;
-		// nvme1 = &nvme1; // TODO: Port 바꾸기
+		// nvme1 = &nvme1; 
 		nvme2 = &nvme2; // TODO: 이름 바꾸기
 		nvme3 = &nvme3; // TODO: 일름 바꾸기
 	};
@@ -530,9 +530,12 @@
 // 	};
 // };
 
-//
+
+//<<>>
 &pcie2x1l0 {
-	reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
+	// TODO: Port 바꾸기
+	//>> reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
+	reset-gpios = <&gpio4 RK_PC3 GPIO_ACTIVE_HIGH>;
 	rockchip,init-delay-ms = <100>;
 	vpcie3v3-supply = <&vcc_3v3_pcie20>;
 	status = "okay";
