@@ -177,17 +177,17 @@
 		regulator-max-microvolt = <5000000>;
 		vin-supply = <&vcc5v0_usb>;
 	};
-	// vcc3v3_host_32: vcc3v3-host-32 {
-	// 	compatible = "regulator-fixed";
-	// 	enable-active-high;
-	// 	gpio = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&vcc3v3_host32_en>;
-	// 	regulator-name = "vcc3v3_host_32";
-	// 	regulator-min-microvolt = <3300000>;
-	// 	regulator-max-microvolt = <3300000>;
-	// 	vin-supply = <&vcc5v0_sys>;
-	// };
+	vcc3v3_host_32: vcc3v3-host-32 {
+		compatible = "regulator-fixed";
+		enable-active-high;
+		gpio = <&gpio3 RK_PA5 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&vcc3v3_host32_en>;
+		regulator-name = "vcc3v3_host_32";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		vin-supply = <&vcc5v0_sys>;
+	};
 	// 	vcc5v0_host_20: vcc5v0-host-20 {
 	// 	compatible = "regulator-fixed";
 	// 	enable-active-high;
@@ -722,9 +722,9 @@
 			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
 
-		// vcc3v3_host32_en: vcc3v3-host32-en {
-		// 	rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
-		// };
+		vcc3v3_host32_en: vcc3v3-host32-en {
+			rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
+		};
 	};
 };
 
