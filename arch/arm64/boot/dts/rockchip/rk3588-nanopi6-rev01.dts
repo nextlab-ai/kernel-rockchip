@@ -16,10 +16,10 @@
 	aliases {
 		ethernet0 = &r8125_u10;
 		ethernet1 = &r8125_u12;
-		// nvme0 = &nvme0;
-		// nvme1 = &nvme1;
-		// nvme2 = &nvme2;
-		nvme3 = &nvme3;
+		nvme0 = &nvme0;
+		// nvme1 = &nvme1; // TODO: Port 바꾸기
+		nvme2 = &nvme2; // TODO: 이름 바꾸기
+		nvme3 = &nvme3; // TODO: 일름 바꾸기
 	};
 
 	/* If hdmirx node is disabled, delete the reserved-memory node here. */
@@ -502,8 +502,8 @@
 };
 
 &mach {
-	hwrev = <1>;
-	model = "NanoPC-T6";
+	hwrev = <0x0a>;
+	model = "CM3588 Nextlab";
 };
 
 &mdio1 {
@@ -595,61 +595,62 @@
 	};
 };
 
+//<<>>
+&pcie30phy {
+	rockchip,pcie30-phymode = <PHY_MODE_PCIE_NABIBI>;
+	status = "okay";
+};
 
+//>>
 // &pcie30phy {
-// 	rockchip,pcie30-phymode = <PHY_MODE_PCIE_NABIBI>;
 // 	status = "okay";
 // };
 
-//
-&pcie30phy {
-	status = "okay";
-};
-
-//
-&pcie3x4 {
-	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
-	vpcie3v3-supply = <&vcc3v3_pcie30>;
-	status = "okay";
-};
-
+//>>
 // &pcie3x4 {
-// 	/* 1. CON13: pcie30phy port0 lane0 */
-// 	max-link-speed = <3>;
-// 	num-lanes = <1>;
 // 	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
 // 	vpcie3v3-supply = <&vcc3v3_pcie30>;
 // 	status = "okay";
-
-// 	pcie@0,0 {
-// 		reg = <0x00000000 0 0 0 0>;
-// 		#address-cells = <3>;
-// 		#size-cells = <2>;
-
-// 		nvme0: pcie@0,0 {
-// 			reg = <0x000000 0 0 0 0>;
-// 		};
-// 	};
 // };
 
-// &pcie3x2 {
-// 	/* 3. CON15: pcie30phy port1 lane0 */
-// 	max-link-speed = <3>;
-// 	num-lanes = <1>;
-// 	reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
-// 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-// 	status = "okay";
+//<<>>
+&pcie3x4 {
+	/* 1. CON13: pcie30phy port0 lane0 */
+	max-link-speed = <3>;
+	num-lanes = <1>;
+	reset-gpios = <&gpio4 RK_PB6 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc3v3_pcie30>;
+	status = "okay";
 
-// 	pcie@0,0 {
-// 		reg = <0x00100000 0 0 0 0>;
-// 		#address-cells = <3>;
-// 		#size-cells = <2>;
+	pcie@0,0 {
+		reg = <0x00000000 0 0 0 0>;
+		#address-cells = <3>;
+		#size-cells = <2>;
 
-// 		nvme2: pcie@10,0 {
-// 			reg = <0x000000 0 0 0 0>;
-// 		};
-// 	};
-// };
+		nvme0: pcie@0,0 {
+			reg = <0x000000 0 0 0 0>;
+		};
+	};
+};
+
+&pcie3x2 {
+	/* 3. CON15: pcie30phy port1 lane0 */
+	max-link-speed = <3>;
+	num-lanes = <1>;
+	reset-gpios = <&gpio4 RK_PB3 GPIO_ACTIVE_HIGH>;
+	vpcie3v3-supply = <&vcc3v3_pcie30>;
+	status = "okay";
+
+	pcie@0,0 {
+		reg = <0x00100000 0 0 0 0>;
+		#address-cells = <3>;
+		#size-cells = <2>;
+
+		nvme2: pcie@10,0 {
+			reg = <0x000000 0 0 0 0>;
+		};
+	};
+};
 
 
 &pinctrl {
@@ -877,15 +878,15 @@
 	dr_mode = "host";
 	status = "okay";
 };
-
-// &usbhost3_0 {
-// 	status = "okay";
-// };
-
-// &usbhost_dwc3_0 {
-// 	dr_mode = "host";
-// 	status = "okay";
-// };
+//<<>>
+&usbhost3_0 {
+	status = "okay";
+};
+//<<>>
+&usbhost_dwc3_0 {
+	dr_mode = "host";
+	status = "okay";
+};
 
 
 &vcc_3v3_sd_s0 {
