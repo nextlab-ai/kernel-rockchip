@@ -19,7 +19,7 @@
 		// nvme0 = &nvme0;
 		// nvme1 = &nvme1;
 		// nvme2 = &nvme2;
-		// nvme3 = &nvme3;
+		nvme3 = &nvme3;
 	};
 
 	/* If hdmirx node is disabled, delete the reserved-memory node here. */
@@ -92,7 +92,7 @@
 			70000	5
 		>;
 	};
-
+    //<<>>
 	adc_keys: adc-keys {
 		compatible = "adc-keys";
 		io-channels = <&saradc 1>;
@@ -107,7 +107,7 @@
 		};
 	};
 
-
+    //<<>>
 	gpio_keys: gpio-keys {
 		compatible = "gpio-keys";
 		pinctrl-names = "default";
@@ -177,6 +177,7 @@
 		regulator-max-microvolt = <5000000>;
 		vin-supply = <&vcc5v0_usb>;
 	};
+	//<<>>
 	vcc3v3_host_32: vcc3v3-host-32 {
 		compatible = "regulator-fixed";
 		enable-active-high;
@@ -188,17 +189,18 @@
 		regulator-max-microvolt = <3300000>;
 		vin-supply = <&vcc5v0_sys>;
 	};
-	// 	vcc5v0_host_20: vcc5v0-host-20 {
-	// 	compatible = "regulator-fixed";
-	// 	enable-active-high;
-	// 	gpio = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
-	// 	pinctrl-names = "default";
-	// 	pinctrl-0 = <&vcc5v0_host20_en>;
-	// 	regulator-name = "vcc5v0_host_20";
-	// 	regulator-min-microvolt = <5000000>;
-	// 	regulator-max-microvolt = <5000000>;
-	// 	vin-supply = <&vcc5v0_usb>;
-	// };
+	//<<>>
+	vcc5v0_host_20: vcc5v0-host-20 {
+		compatible = "regulator-fixed";
+		enable-active-high;
+		gpio = <&gpio1 RK_PA4 GPIO_ACTIVE_HIGH>;
+		pinctrl-names = "default";
+		pinctrl-0 = <&vcc5v0_host20_en>;
+		regulator-name = "vcc5v0_host_20";
+		regulator-min-microvolt = <5000000>;
+		regulator-max-microvolt = <5000000>;
+		vin-supply = <&vcc5v0_usb>;
+	};
 
 	vcc3v3_pcie30: vcc3v3-pcie30 {
 		compatible = "regulator-fixed";
@@ -211,19 +213,19 @@
 		regulator-max-microvolt = <3300000>;
 		vin-supply = <&vcc5v0_sys>;
 	};
-//    
-	vdd_mpcie_3v3: vdd-mpcie-3v3 {
-		compatible = "regulator-fixed";
-		enable-active-high;
-		gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_HIGH>;
-		pinctrl-names = "default";
-		pinctrl-0 = <&pcie_m2_1_pwren>;
-		regulator-name = "vdd_mpcie_3v3";
-		regulator-min-microvolt = <3300000>;
-		regulator-max-microvolt = <3300000>;
-		vin-supply = <&vcc5v0_sys>;
-	};
-// 
+// //>>    
+// 	vdd_mpcie_3v3: vdd-mpcie-3v3 {
+// 		compatible = "regulator-fixed";
+// 		enable-active-high;
+// 		gpio = <&gpio4 RK_PC2 GPIO_ACTIVE_HIGH>;
+// 		pinctrl-names = "default";
+// 		pinctrl-0 = <&pcie_m2_1_pwren>;
+// 		regulator-name = "vdd_mpcie_3v3";
+// 		regulator-min-microvolt = <3300000>;
+// 		regulator-max-microvolt = <3300000>;
+// 		vin-supply = <&vcc5v0_sys>;
+	// };
+
 	vdd_4glte_3v3: vdd-4glte-3v3 {
 		compatible = "regulator-fixed";
 		enable-active-high;
@@ -534,35 +536,35 @@
 		};
 	};
 };
-
-// &pcie2x1l1 {
-// 	/* 4. CON16: pcie30phy port1 lane1 */
-// 	max-link-speed = <3>;
-// 	num-lanes = <1>;
-// 	phys = <&pcie30phy>;
-// 	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
-// 	vpcie3v3-supply = <&vcc3v3_pcie30>;
-// 	status = "okay";
-
-// 	pcie@0,0 {
-// 		reg = <0x00300000 0 0 0 0>;
-// 		#address-cells = <3>;
-// 		#size-cells = <2>;
-
-// 		nvme3: pcie@30,0 {
-// 			reg = <0x000000 0 0 0 0>;
-// 		};
-// 	};
-// };
-
-//
+//<<>>
 &pcie2x1l1 {
+	/* 4. CON16: pcie30phy port1 lane1 */
+	max-link-speed = <3>;
+	num-lanes = <1>;
+	phys = <&pcie30phy>;
 	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
-	rockchip,init-delay-ms = <500>;
-	rockchip,skip-hw-retry;
-	vpcie3v3-supply = <&vdd_mpcie_3v3>;
+	vpcie3v3-supply = <&vcc3v3_pcie30>;
 	status = "okay";
+
+	pcie@0,0 {
+		reg = <0x00300000 0 0 0 0>;
+		#address-cells = <3>;
+		#size-cells = <2>;
+
+		nvme3: pcie@30,0 {
+			reg = <0x000000 0 0 0 0>;
+		};
+	};
 };
+
+//>>
+// &pcie2x1l1 {
+// 	reset-gpios = <&gpio4 RK_PA2 GPIO_ACTIVE_HIGH>;
+// 	rockchip,init-delay-ms = <500>;
+// 	rockchip,skip-hw-retry;
+// 	vpcie3v3-supply = <&vdd_mpcie_3v3>;
+// 	status = "okay";
+// };
 
 &pcie2x1l2 {
 	reset-gpios = <&gpio4 RK_PA4 GPIO_ACTIVE_HIGH>;
@@ -639,6 +641,7 @@
 
 
 &pinctrl {
+   //<<>>
 	gpio-key {
 		key1_pin: key1-pin {
 			rockchip,pins = <0 RK_PD5 RK_FUNC_GPIO &pcfg_pull_up>;
@@ -721,7 +724,7 @@
 		vcc5v0_host20_en: vcc5v0-host20-en {
 			rockchip,pins = <1 RK_PA4 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
-
+		//<<>>
 		vcc3v3_host32_en: vcc3v3-host32-en {
 			rockchip,pins = <3 RK_PA5 RK_FUNC_GPIO &pcfg_pull_none>;
 		};
